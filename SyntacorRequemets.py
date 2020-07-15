@@ -2,7 +2,7 @@
 class LinearSpectrum:
     #read text file
     A = []
-    with open('file.txt') as f:
+    with open('in.txt') as f:
         for line in f:
             A.append(line.rstrip())
             A = [list(map(int, x)) for x in A]
@@ -36,6 +36,6 @@ class LinearSpectrum:
     #time check
     %time
     #save to text
-    with open("file.txt", "w") as output:
+    with open("out.txt", "w") as output:
         for i in range(len(x_lim)):
             output.write(str(i)+'    '+str(x_lim[i])+'\n')
