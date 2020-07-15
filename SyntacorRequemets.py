@@ -23,7 +23,7 @@ class LinearSpectrum:
     weight = []
     for i in range(len(k)):
         weight.append(sum(k[i]))
-    #print(weight)
+    
     #number weight vectors
     z = 0
     x_lim = []
@@ -31,12 +31,10 @@ class LinearSpectrum:
         for i in range(len(weight)):
             if weight[i] == j:
                 z += 1
-                #print(i)
-        #print(z)
         x_lim.append(z)
         z = 0
     #time check
-#     %time
+    %time
     #save to text
     with open("file.txt", "w") as output:
         for i in range(len(x_lim)):
