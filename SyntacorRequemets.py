@@ -2,7 +2,7 @@
 class LinearSpectrum:
     #read text file
     A = []
-    with open('/content/tst_20_32.txt') as f:
+    with open('file.txt') as f:
         for line in f:
             A.append(line.rstrip())
             A = [list(map(int, x)) for x in A]
