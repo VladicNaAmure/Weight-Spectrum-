@@ -1,4 +1,4 @@
-# Commented out IPython magic to ensure Python compatibility.
+#Code without librarry as numpy, pandas, matlab.
 class LinearSpectrum:
     #read text file
     A = []
