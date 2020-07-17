@@ -1,0 +1,10 @@
+CPU times: (%time)
+user 981 ms, 
+sys: 2.43 ms, 
+total: 984 ms
+
+Wall time: 986 ms
+
+Memory: (%memit)
+peak memory: 181.35 MiB, 
+increment: 0.05 MiB
