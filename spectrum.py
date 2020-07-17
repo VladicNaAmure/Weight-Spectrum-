@@ -1,6 +1,3 @@
-import os
-import sys
-
 def read(path):
     A = []    # Будущая матрица (вектор). Идея в том, чтобы перевести значения из двоичной системы в десятиричную
     with open(path) as f:
@@ -83,5 +80,3 @@ def main(path):
     outfile(path)
     print("Готово!")
     #print("Готово!".format([print(str(w) + "    " +str(path[0][w])) for w in range(len(path[0]))]))
-
-main('/content/tst_20_32.txt')
