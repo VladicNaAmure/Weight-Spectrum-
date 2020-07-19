@@ -1,0 +1,10 @@
+CPU times: (%time)
+user 3h 4min 44s, 
+sys: 1.48 s, 
+total: 3h 4min 46s
+
+Wall time: 3h 4min 53s
+
+Memory: (%memit)
+peak memory: 182.55 MiB, 
+increment: 1.65 MiB
