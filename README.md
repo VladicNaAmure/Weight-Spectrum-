@@ -38,7 +38,6 @@ file_in | tst_20_32 | tst_20_8192 | tst_24_32 | tst_24_8 | tst_25_8 | tst_30_8 |
 real time| 984 ms | 54.1 s | 15.8 s | 1.38 ms | 1.68 ms | 1.53 ms | 35min 13s | 3h 4min 46s | 1.98 ms | 1h 31min 26s | 269
 user time| 981 ms | 54.1 s | 15.8 s | 1.38 ms | 886 µs | 1.44 ms | 35min 13s | 3h 4min 44s | 1.81 ms | 1h 31min 25s | 269
 sys time| 2.43 ms | 6.54 ms | 987 µs | 1 µs | 799 µs | 90 µs | 214 ms | 1.48 s | 176 µs | 819 ms | 269
---- | --- | --- | --- |--- |--- |--- |--- |--- |--- |--- |---
 peak memory | 181.35 MiB | 182.39 MiB | 182.42 MiB | 182.43 MiB | 182.07 MiB | 182.14 MiB | 182.07 MiB | 182.55 MiB | 182.05 MiB | 182.86 MiB | 269
 
 # Ключивые решения:
