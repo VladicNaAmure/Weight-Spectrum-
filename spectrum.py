@@ -34,7 +34,7 @@ def result(A,n,size):
     elif n > size:    # Если длина вектора больше количества векторов (строк), меняем их значения местами для нахождения значений базиса.
         n, size = size, n
         #Посчитаем базис
-        for r in range(2):
+        for r in range(1):
             basis = []
             for j in range(n):
                 length = len(bin(A[j])[2:]) - 1
