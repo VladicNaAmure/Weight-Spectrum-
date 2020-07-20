@@ -1,6 +1,6 @@
 def read(path):
     # Идея в том, чтобы перевести значения из двоичной системы в десятеричную
-    A = []    
+    A = []
     with open(path) as f:
         for line in f:
             A.append(line.rstrip())
@@ -18,7 +18,7 @@ def read(path):
                     if int(A[i][j]) > 1:
                         first_message = "Значение > 1"
                         second_message = "Строка: " + str(i) + " Позиция: " + str(j)
-                        return(print(first_message), print(second_message), 
+                        return(print(first_message), print(second_message),
                                print("Обработка остановлена..."))
 
         for i in range(len(A)):    # Перевод из двоичной системы
@@ -39,7 +39,7 @@ def result(A, n, size):
                 basis.append(A[i])
 
     # Производим рассчет биномальных коэффициентов, по найденому базису.
-    weight = [0]*(n+1)    # Равен длине вектора (n+1, т.к. есть значение веса 0).
+    weight = [0]*(n+1)    # Равен длине вектора (n+1, из-за веса 0).
 
     z = int(2**(size))
     zc = z ^ (z//2)
@@ -48,7 +48,7 @@ def result(A, n, size):
         if zc % 2 == 1:
             temp ^= basis[k]
             zc // 2
-    # Преобразование значений в двоичные строки и считаем количество совпадений с 1
+    # Преобразование значений в двоичные и считаем количество совпадений с 1
     location = bin(temp).count('1')
     weight[location] += 1    # Вес, как количество единиц
     # Присваиваем значения, для подсчета длины
@@ -59,7 +59,7 @@ def result(A, n, size):
         temp ^= basis[id_j]
         location = bin(temp).count('1')
         weight[location] += 1
-        # Возвращаем значение длины в original для последующего сравния с предыдущем elder.
+        # Возвращаем значение длины в original для сравния elder
         elder, original = original, (j+1) ^ ((j+1)//2)
     result.append(weight)
     return(result)
@@ -70,7 +70,7 @@ def outfile(path):
         for i in range(len(path[0])):
             output.write(str(i)+'\t'+str(path[0][i])+'\n')
 
-            
+
 def main(path):
     A, n, size = read(path)
     path = result(A, n, size)
