@@ -47,26 +47,26 @@ def result(A,n,size):
         n, size = size, n
         #Производим рассчет биномальных коэффициентов, по найденому базису.
         weight = [0]*(n+1)    # Создаем пустой вектор, равного длине вектора (n+1, т.к. есть значение веса 0).
-        for i in range(1):
-            z = int(2**(size) * i)    # Посчитаем значение диапазона для значения 1. 
-            zc = z ^ (z//2)    # Операция XOR. 
-            temp = 0    # Временная переменная
-            for k in range(zc):
-                if zc % 2 == 1:    # Деление по модулю на 2.
-                    temp ^= basis[k]    # XOR и присваивание.
-                    zc // 2    # Держим int.
+        
+        z = int(2**(size))    # Посчитаем значение диапазона для значения 1. 
+        zc = z ^ (z//2)    # Операция XOR. 
+        temp = 0    # Временная переменная
+        for k in range(zc):
+            if zc % 2 == 1:    # Деление по модулю на 2.
+                temp ^= basis[k]    # XOR и присваивание.
+                zc // 2    # Держим int.
                 
-            location = bin(temp).count('1')    # Преобразование значений в двоичные строки и считаем количество совпадений с 1
-            weight[location] += 1    # Распределению по весу вектора. (Количество единиц).
+        location = bin(temp).count('1')    # Преобразование значений в двоичные строки и считаем количество совпадений с 1
+        weight[location] += 1    # Распределению по весу вектора. (Количество единиц).
             
-            elder, original = zc, (z+1) ^ ((z+1)//2)    # Присваиваем значения, для подсчета длины.
-            for j in range(z + 1, int(2**(size) * (i+1))):
-                id_j = bin(elder - original)[::-1].find('1')    # Ищем первое совпадание с 1 в двоичном значении. 
-                temp ^= basis[id_j]    # XOR и присваивание.
-                location = bin(temp).count('1') 
-                weight[location] += 1
-                elder, original = original, (j+1) ^ ((j+1)//2)    # Возвращаем значение длины в original для последующего сравния с предыдущем elder.
-            result.append(weight)    # Записываем результат.
+        elder, original = zc, (z+1) ^ ((z+1)//2)    # Присваиваем значения, для подсчета длины.
+        for j in range(z + 1, int(2**(size) * 2)):
+            id_j = bin(elder - original)[::-1].find('1')    # Ищем первое совпадание с 1 в двоичном значении. 
+            temp ^= basis[id_j]    # XOR и присваивание.
+            location = bin(temp).count('1') 
+            weight[location] += 1
+            elder, original = original, (j+1) ^ ((j+1)//2)    # Возвращаем значение длины в original для последующего сравния с предыдущем elder.
+        result.append(weight)    # Записываем результат.
     return(result)
 
 def outfile(path):
