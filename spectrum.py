@@ -60,12 +60,8 @@ def result(A,n,size):
 
 def outfile(path):
     with open("file.txt", "w") as output:
-        if len(path) != 1:
-            for i in range(len(path)):
-                output.write(str(i)+'    '+str(path[i])+'\n')    # Приводим в нужный формат. TSV без заголовка: 2 столбца (вес, количество), разделитель полей - HT, разделитель записей - LF.
-        else:
-            for i in range(len(path[0])):
-                output.write(str(i)+'    '+str(path[0][i])+'\n')
+        for i in range(len(path[0])):
+            output.write(str(i)+'\t'+str(path[0][i])+'\n')   
 
 def main(path):
     A,n,size = read(path)
