@@ -24,9 +24,9 @@ def read(path):
 
 def result(A,n,size):
     result = []    # Вектор, в котором будут записываться сумма биномиальных коэффициентов для n-й (n - количество строк) степени с индексом в качестве веса.   
-    #Посчитаем базис
+
     for r in range(1):
-        basis = []
+        basis = []    # Содержит линейно зависимые вектора.
         for j in range(size):
             length = len(bin(A[j])[2:]) - 1
             for i in range(size):
@@ -34,16 +34,17 @@ def result(A,n,size):
                     if i != j:
                         A[i] ^= A[j]
                 basis.append(A[i])
+                
     #Производим рассчет биномальных коэффициентов, по найденому базису.
     weight = [0]*(n+1)    # Создаем пустой вектор, равного длине вектора (n+1, т.к. есть значение веса 0).
         
-    z = int(2**(size))    # Посчитаем значение диапазона для значения 1. 
-    zc = z ^ (z//2)    # Операция XOR. 
-    temp = 0    # Временная переменная
+    z = int(2**(size))    
+    zc = z ^ (z//2)     
+    temp = 0    
     for k in range(zc):
-        if zc % 2 == 1:    # Деление по модулю на 2.
-            temp ^= basis[k]    # XOR и присваивание.
-            zc // 2    # Держим int.
+        if zc % 2 == 1:    
+            temp ^= basis[k]   
+            zc // 2    
                 
     location = bin(temp).count('1')    # Преобразование значений в двоичные строки и считаем количество совпадений с 1
     weight[location] += 1    # Распределению по весу вектора. (Количество единиц).
@@ -51,11 +52,11 @@ def result(A,n,size):
     elder, original = zc, (z+1) ^ ((z+1)//2)    # Присваиваем значения, для подсчета длины.
     for j in range(z + 1, int(2**(size) * 2)):
         id_j = bin(elder - original)[::-1].find('1')    # Ищем первое совпадание с 1 в двоичном значении. 
-        temp ^= basis[id_j]    # XOR и присваивание.
+        temp ^= basis[id_j]    
         location = bin(temp).count('1') 
         weight[location] += 1
         elder, original = original, (j+1) ^ ((j+1)//2)    # Возвращаем значение длины в original для последующего сравния с предыдущем elder.
-    result.append(weight)    # Записываем результат.
+    result.append(weight)   
     return(result)
 
 def outfile(path):
