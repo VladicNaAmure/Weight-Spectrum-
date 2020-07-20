@@ -1,30 +1,33 @@
 def read(path):
-    A = []    # Будущая матрица (вектор). Идея в том, чтобы перевести значения из двоичной системы в десятиричную
+    # Идея в том, чтобы перевести значения из двоичной системы в десятеричную
+    A = []    
     with open(path) as f:
         for line in f:
             A.append(line.rstrip())
-        n = len(A[0])    # Длина вектора, т.к. вектора должны быть равной длины. Взяли вектор [0]
+        n = len(A[0])    # Длина вектора [0]
         size = len(A)    # Количество векторов (строк) в файле
-
-        for i in range(size):    # Проверим, что входной файл соотвестует необходимым критериям. Если нет, останавливаем процесс обработки.
+        # Проверим входной файл по критериям
+        for i in range(size):
             if len(A[i]) != n:
                 first_message = "Размер строк данных имеет разные длины"
-                second_message = "Строка: " + str(i)+" отличается от первой строки"
-                return(print(first_message), print(second_message),print("Обработка остановлена..."))
+                second_message = "Строка: " + str(i)
+                return(print(first_message), print(second_message), 
+                       print("Обработка остановлена..."))
             else:
                 for j in range(n):
                     if int(A[i][j]) > 1:
-                        first_message = "Входной файл содержит значение > 1. Вам нужно использовать только 0 и 1 значения во входном файле."
+                        first_message = "Значение > 1"
                         second_message = "Строка: " + str(i) + " Позиция: " + str(j)
-                        return(print(first_message), print(second_message),print("Обработка остановлена..."))
+                        return(print(first_message), print(second_message), 
+                               print("Обработка остановлена..."))
 
         for i in range(len(A)):    # Перевод из двоичной системы
-            A[i] = int(A[i],2)
+            A[i] = int(A[i], 2)
     return(A, n, size)
 
-def result(A,n,size):
-    result = []    # Вектор, в котором будут записываться сумма биномиальных коэффициентов для n-й (n - количество строк) степени с индексом в качестве веса.   
 
+def result(A, n, size):
+    result = []    # Вектор, для записи конечного результата
     for r in range(1):
         basis = []    # Содержит линейно зависимые вектора.
         for j in range(size):
@@ -34,39 +37,42 @@ def result(A,n,size):
                     if i != j:
                         A[i] ^= A[j]
                 basis.append(A[i])
-                
-    #Производим рассчет биномальных коэффициентов, по найденому базису.
-    weight = [0]*(n+1)    # Создаем пустой вектор, равного длине вектора (n+1, т.к. есть значение веса 0).
-        
-    z = int(2**(size))    
-    zc = z ^ (z//2)     
-    temp = 0    
+
+    # Производим рассчет биномальных коэффициентов, по найденому базису.
+    weight = [0]*(n+1)    # Равен длине вектора (n+1, т.к. есть значение веса 0).
+
+    z = int(2**(size))
+    zc = z ^ (z//2)
+    temp = 0
     for k in range(zc):
-        if zc % 2 == 1:    
-            temp ^= basis[k]   
-            zc // 2    
-                
-    location = bin(temp).count('1')    # Преобразование значений в двоичные строки и считаем количество совпадений с 1
-    weight[location] += 1    # Распределению по весу вектора. (Количество единиц).
-            
-    elder, original = zc, (z+1) ^ ((z+1)//2)    # Присваиваем значения, для подсчета длины.
+        if zc % 2 == 1:
+            temp ^= basis[k]
+            zc // 2
+    # Преобразование значений в двоичные строки и считаем количество совпадений с 1
+    location = bin(temp).count('1')
+    weight[location] += 1    # Вес, как количество единиц
+    # Присваиваем значения, для подсчета длины
+    elder, original = zc, (z+1) ^ ((z+1)//2)
     for j in range(z + 1, int(2**(size) * 2)):
-        id_j = bin(elder - original)[::-1].find('1')    # Ищем первое совпадание с 1 в двоичном значении. 
-        temp ^= basis[id_j]    
-        location = bin(temp).count('1') 
+        # Ищем первое совпадание с 1 в двоичном значении
+        id_j = bin(elder - original)[::-1].find('1')
+        temp ^= basis[id_j]
+        location = bin(temp).count('1')
         weight[location] += 1
-        elder, original = original, (j+1) ^ ((j+1)//2)    # Возвращаем значение длины в original для последующего сравния с предыдущем elder.
-    result.append(weight)   
+        # Возвращаем значение длины в original для последующего сравния с предыдущем elder.
+        elder, original = original, (j+1) ^ ((j+1)//2)
+    result.append(weight)
     return(result)
+
 
 def outfile(path):
     with open("file.txt", "w") as output:
         for i in range(len(path[0])):
-            output.write(str(i)+'\t'+str(path[0][i])+'\n')   
+            output.write(str(i)+'\t'+str(path[0][i])+'\n')
 
+            
 def main(path):
-    A,n,size = read(path)
-    path = result(A,n,size)
+    A, n, size = read(path)
+    path = result(A, n, size)
     outfile(path)
     print("Готово!")
-    #print("Готово!".format([print(str(w) + "    " +str(path[0][w])) for w in range(len(path[0]))]))
