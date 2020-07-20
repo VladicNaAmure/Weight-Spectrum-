@@ -11,7 +11,7 @@ def read(path):
             if len(A[i]) != n:
                 first_message = "Размер строк данных имеет разные длины"
                 second_message = "Строка: " + str(i)
-                return(print(first_message), print(second_message), 
+                return(print(first_message), print(second_message),
                        print("Обработка остановлена..."))
             else:
                 for j in range(n):
